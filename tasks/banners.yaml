@@ -1,0 +1,26 @@
+---
+
+# BANN-7122 /etc/motd
+
+- name: BANN-7126 Banners
+  ansible.builtin.template:
+    src: etc/issue.j2
+    dest: /etc/issue
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - lynis
+    - lynis-banners
+
+
+- name: BANN-7130 Banners
+  ansible.builtin.template:
+    src: etc/issue.j2
+    dest: /etc/issue.net
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - lynis
+    - lynis-banners

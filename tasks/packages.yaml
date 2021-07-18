@@ -1,0 +1,27 @@
+---
+
+- name: PKGS-7346 Get packages to purge
+  shell:
+    cmd: "dpkg --list | grep ^rc | awk '{ print $2; }'"
+  changed_when: false
+  register: packages_not_purged
+
+
+- name: PKGS-7346 Purge old/removed packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: absent
+    purge: yes
+  with_lines:
+    - "{{ packages_not_purged.stdout }}"
+  become: true
+
+
+- name: PKGS-7370, PKGS-7394, ACCT-9622 deb packages
+  ansible.builtin.apt:
+    name:
+      - "{{ item }}"
+    state: present
+  become: true
+  with_items:
+    - "{{ security_apt_packges }}"

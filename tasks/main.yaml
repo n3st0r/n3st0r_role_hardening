@@ -1,0 +1,27 @@
+---
+
+- name: Include roles for Banners
+  import_tasks: banners.yaml
+
+- name: Include roles for root /root/.ssh/ dir
+  import_tasks: root_ssh.yaml
+
+- name: Include roles for sudoers configuration
+  import_tasks: sudoers.yaml
+
+- name: Include roles for network configuration
+  import_tasks: networking.yaml
+
+- name: Include roles for packages
+  import_tasks: packages.yaml
+
+- name: Ensure files have right priviliges
+  ansible.builtin.file:
+    path: "{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+    state: touch
+  changed_when: false
+  with_items:
+    - "{{ security_network_blacklist_modules_file }}"
