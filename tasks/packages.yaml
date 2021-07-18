@@ -25,3 +25,27 @@
   become: true
   with_items:
     - "{{ security_apt_packges }}"
+
+
+- name: ACCT-9622 acct
+  ansible.builtin.apt:
+    name:
+      - "acct"
+    state: present
+  become: true
+
+
+- name: ACCT-9626 sysstat
+  ansible.builtin.apt:
+    name:
+      - "sysstat"
+    state: present
+  become: true
+
+
+- name: ACCT-9632 auditd
+  ansible.builtin.apt:
+    name:
+      - "auditd"
+    state: present
+  become: true
