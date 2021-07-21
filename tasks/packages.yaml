@@ -46,6 +46,26 @@
 - name: ACCT-9632 auditd
   ansible.builtin.apt:
     name:
-      - "auditd"
+      - auditd
     state: present
   become: true
+
+
+- name: FINT-4350 aide
+  ansible.builtin.apt:
+    name:
+      - aide
+    state: present
+  become: true
+  register: aide_init
+
+
+- name: FINT-4350 aide - init 
+  shell:
+    cmd: "aideinit"
+  when: aide_init.changed
+
+# - name: 
+# , , , HRDN-7230 chkrootkit, HRDN-7230 malware scanner, CRYP-8005 psuedo random, USB-3000 usbguard
+# , , , chkrootkit, clamav, clamav-daemon, haveged, usbguard
+#     state: present    

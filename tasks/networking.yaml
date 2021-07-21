@@ -4,21 +4,18 @@
   lineinfile:
     dest: "{{ security_network_blacklist_modules_file }}"
     line: "install {{ item }} /bin/true"
-    owner: root
-    group: root
-    mode: 0644
     state: present
     create: yes
   with_items:
     - "{{ security_network_blacklist_modules }}"
-  register: netw3200
+  register: security_network_blacklist
 
 
 - name: Attempt to remove the protocol module
   ansible.builtin.shell:
     cmd: "modprobe -r {{ item }}"
   ignore_errors: true
-  when: netw3200.changed
+  when: security_network_blacklist.changed
   with_items:
     - "{{ security_network_blacklist_modules }}"
   # notify:

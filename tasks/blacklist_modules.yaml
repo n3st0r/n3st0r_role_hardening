@@ -1,0 +1,22 @@
+---
+
+- name: STRG-1840, STRG-1846
+  lineinfile:
+    dest: "{{ security_blacklist_modules_file }}"
+    line: "blacklist {{ item }}"
+    state: present
+    create: yes
+  with_items:
+    - "{{ security_blacklist_modules }}"
+  register: blacklist_module
+
+
+- name: Attempt to remove the protocol module
+  ansible.builtin.shell:
+    cmd: "modprobe -r {{ item }}"
+  ignore_errors: true
+  when: blacklist_module.changed
+  with_items:
+    - "{{ security_blacklist_modules }}"
+  # notify:
+  #   - reboot

@@ -12,6 +12,9 @@
 - name: Include roles for network configuration
   import_tasks: networking.yaml
 
+- name: Include roles for blacklist modules
+  import_tasks: blacklist_modules.yaml
+
 - name: Include roles for packages
   import_tasks: packages.yaml
 

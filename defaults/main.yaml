@@ -1,12 +1,17 @@
 ---
 
 security_modules_dir: "etc/modprobe.d"
+security_blacklist_modules_file: "{{ security_modules_dir }}/blacklist.conf"
 security_network_blacklist_modules_file: "{{ security_modules_dir }}/blacklist.conf"
 security_network_blacklist_modules:
   - dccp
   - sctp
   - rds
   - tipc
+
+security_blacklist_modules:
+  - usb-storage
+  - firewire-core
 
 # PKGS-7370 debsums, PKGS-7394 apt-show-versions, ACCT-9622 acct
 security_apt_packges:
