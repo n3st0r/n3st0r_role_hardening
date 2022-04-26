@@ -1,7 +1,7 @@
 ---
 
 - name: STRG-1840, STRG-1846
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "{{ security_blacklist_modules_file }}"
     line: "blacklist {{ item }}"
     state: present

@@ -16,7 +16,7 @@
     state: touch
     owner: root
     group: root
-    mode: 0700
+    mode: 0600
   changed_when: false
   become: true
 

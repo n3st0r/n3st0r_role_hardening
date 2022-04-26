@@ -1,7 +1,7 @@
 ---
 
 - name: NETW-3200 Determine if protocol is really needed
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "{{ security_network_blacklist_modules_file }}"
     line: "install {{ item }} /bin/true"
     state: present
